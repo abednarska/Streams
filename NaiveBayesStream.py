@@ -80,13 +80,6 @@ class modelFunctions:
 
 
 class StreamPred(modelFunctions):
-	"""def Train(self, trainingSet, limit = 500):
-					random.shuffle(trainingSet)
-					if (len(trainingSet) > limit):
-						trainingSet = trainingSet[:limit]
-					summaries = self.summarizeByClass(trainingSet)
-					return(summaries)"""
-
 	def Train(self, trainingSet, limit):
 		classes = []
 		trainingSet = trainingSet

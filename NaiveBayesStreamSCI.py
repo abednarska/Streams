@@ -3,6 +3,7 @@ import random
 import math
 import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
+from sklearn import metrics
 
 class modelFunctions:
 	def separateLabel(self, chunk):
@@ -70,8 +71,11 @@ class StreamPred(modelFunctions):
 	def Test(self, summaries, testSet):
 		testX = self.separateLabel(testSet)
 		testY = self.separateClass(testSet)
-		accuracy = summaries.score(testX, testY)
+		prediction = summaries.predict(testX)
+		accuracy = metrics.f1_score(testY, prediction)
 		return(accuracy)
+
+
 
 class NaiveBayesStreamSCI(StreamPred):
 	def __init__(self, stream, sensitivity = 0.1, limit = 50):
@@ -106,7 +110,6 @@ class NaiveBayesStreamSCI(StreamPred):
 				samples_used_to_teach.extend(chunk)
 
 			model_changes.append(candidate_accuracy - sensitivity > current_accuracy)
-
 				
 		self.avg_acc = (sum(self.acc)/len(self.acc))
 		self.avg_acc_candidate = (sum(self.acc_candidate)/len(self.acc_candidate))

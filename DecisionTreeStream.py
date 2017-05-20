@@ -3,6 +3,7 @@ import random
 import math
 import matplotlib.pyplot as plt
 from sklearn import tree
+from sklearn import metrics
 
 class modelFunctions:
 	def separateLabel(self, chunk):
@@ -70,7 +71,8 @@ class StreamPred(modelFunctions):
 	def Test(self, summaries, testSet):
 		testX = self.separateLabel(testSet)
 		testY = self.separateClass(testSet)
-		accuracy = summaries.score(testX, testY)
+		prediction = summaries.predict(testX)
+		accuracy = metrics.f1_score(testY, prediction)
 		return(accuracy)
 
 class DecisionTreeStream(StreamPred):
