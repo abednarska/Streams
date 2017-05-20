@@ -76,7 +76,7 @@ class StreamPred(modelFunctions):
 		accuracy = metrics.f1_score(testY, prediction)
 		return(accuracy)
 
-class SVNStream(StreamPred):
+class SVMStream(StreamPred):
 	def __init__(self, stream, sensitivity = 0.1, limit = 50):
 		current_accuracy = 0.
 

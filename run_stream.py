@@ -4,7 +4,7 @@ from StreamNaiveBayesSCI import *
 from StreamDecisionTree import *
 from StreamMLP import *
 from StreamKNN import *
-from StreamSVN import *
+from StreamSVM import *
 import matplotlib.pyplot as plt
 
 # NaiveBayes - autorski
@@ -107,15 +107,15 @@ print(clf4.stability)
 print(clf4.stability_candidate)
 print(clf4.stability_primary)
 
-# SVN - scikit
+# SVM - scikit
 stream = StreamData('sea.csv', chunk_size = 500, schuffle = False)
-clf5 = SVNStream(stream.chunk, sensitivity = 0.02, limit = 500)
+clf5 = SVMStream(stream.chunk, sensitivity = 0.02, limit = 500)
 
 fig = plt.figure()
 plt.plot(clf5.acc, 'r', label = 'Jakosc z najlepszego modelu')
 plt.plot(clf5.acc_candidate, 'b', label = 'Jakosc z modelu kandydujacego')
 plt.plot(clf5.acc_primary, 'g', label = 'Jakosc z modelu pierwotnego')
-fig.suptitle('SVN - scikit', fontsize=20)
+fig.suptitle('SVM - scikit', fontsize=20)
 
 plt.xlabel('Numer probki')
 plt.ylabel('Uzyskana jakosc[%]')
@@ -123,7 +123,7 @@ plt.ylabel('Uzyskana jakosc[%]')
 plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=3, mode="expand", borderaxespad=0.)
 
 plt.show()
-print('SVN - scikit')
+print('SVM - scikit')
 print(clf5.avg_acc)
 print(clf5.avg_acc_candidate)
 print(clf5.avg_acc_primary)

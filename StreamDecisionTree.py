@@ -77,7 +77,7 @@ class StreamPred(modelFunctions):
 		return(accuracy)
 
 class DecisionTreeStream(StreamPred):
-	def __init__(self, stream, sensitivity = 0.1, limit = 50, max_depth = 2):
+	def __init__(self, stream, sensitivity = 0.1, limit = 50, max_depth = 3):
 		current_accuracy = 0.
 
 		self.acc = []

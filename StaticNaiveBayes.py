@@ -85,13 +85,13 @@ class modelFunctions:
 		accuracy = 2*TP/(2*TP+FP+FN)
 		return (accuracy)
 
-class TrainModel(modelFunctions):
+class NaiveBayesTrain(modelFunctions):
 	def __init__(self, trainingSet):
 		separateByClass = self.separateByClass(trainingSet)
 		self.summaries = self.summarizeByClass(trainingSet)
 
-class TestModel(modelFunctions):
+class NaiveBayesTest(modelFunctions):
 	def __init__(self, summaries, testSet):
 		predictions = self.getPredictions(summaries, testSet)
-		accuracy = self.getAccuracy(testSet, predictions)
-		print(accuracy)
+		self.accuracy = self.getAccuracy(testSet, predictions)
+		print(self.accuracy)
