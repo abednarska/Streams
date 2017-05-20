@@ -1,19 +1,11 @@
-from Static import *
-from NaiveBayes import *
 from Stream import *
+from StreamNaiveBayes import *
+from StreamNaiveBayesSCI import *
+from StreamDecisionTree import *
+from StreamMLP import *
+from StreamKNN import *
+from StreamSVN import *
 import matplotlib.pyplot as plt
-import numpy as np
-from NaiveBayesStream import *
-from NaiveBayesStreamSCI import *
-from DecisionTreeStream import *
-from MLPStream import *
-
-"""
-# NaiveBayes - statyczne
-data = StaticData('sea.csv', splitRatio = 0.8)
-train = TrainModel(data.trainingSet)
-test = TestModel(train.summaries, data.testSet)
-"""
 
 # NaiveBayes - autorski
 stream = StreamData('sea.csv', chunk_size = 500, schuffle = False)
@@ -36,7 +28,9 @@ print(clf1.avg_acc)
 print(clf1.avg_acc_candidate)
 print(clf1.avg_acc_primary)
 print(clf1.mcc)
-
+print(clf1.stability)
+print(clf1.stability_candidate)
+print(clf1.stability_primary)
 
 # NaiveBayes - scikit
 stream = StreamData('sea.csv', chunk_size = 500, schuffle = False)
@@ -59,6 +53,9 @@ print(clf2.avg_acc)
 print(clf2.avg_acc_candidate)
 print(clf2.avg_acc_primary)
 print(clf2.mcc)
+print(clf2.stability)
+print(clf2.stability_candidate)
+print(clf2.stability_primary)
 
 # MLP - scikit
 stream = StreamData('sea.csv', chunk_size = 500, schuffle = False)
@@ -81,6 +78,9 @@ print(clf3.avg_acc)
 print(clf3.avg_acc_candidate)
 print(clf3.avg_acc_primary)
 print(clf3.mcc)
+print(clf3.stability)
+print(clf3.stability_candidate)
+print(clf3.stability_primary)
 
 # Decision Tree - scikit
 stream = StreamData('sea.csv', chunk_size = 500, schuffle = False)
@@ -103,3 +103,56 @@ print(clf4.avg_acc)
 print(clf4.avg_acc_candidate)
 print(clf4.avg_acc_primary)
 print(clf4.mcc)
+print(clf4.stability)
+print(clf4.stability_candidate)
+print(clf4.stability_primary)
+
+# SVN - scikit
+stream = StreamData('sea.csv', chunk_size = 500, schuffle = False)
+clf5 = SVNStream(stream.chunk, sensitivity = 0.02, limit = 500)
+
+fig = plt.figure()
+plt.plot(clf5.acc, 'r', label = 'Jakosc z najlepszego modelu')
+plt.plot(clf5.acc_candidate, 'b', label = 'Jakosc z modelu kandydujacego')
+plt.plot(clf5.acc_primary, 'g', label = 'Jakosc z modelu pierwotnego')
+fig.suptitle('SVN - scikit', fontsize=20)
+
+plt.xlabel('Numer probki')
+plt.ylabel('Uzyskana jakosc[%]')
+
+plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=3, mode="expand", borderaxespad=0.)
+
+plt.show()
+print('SVN - scikit')
+print(clf5.avg_acc)
+print(clf5.avg_acc_candidate)
+print(clf5.avg_acc_primary)
+print(clf5.mcc)
+print(clf5.stability)
+print(clf5.stability_candidate)
+print(clf5.stability_primary)
+
+# KNN - scikit
+stream = StreamData('sea.csv', chunk_size = 500, schuffle = False)
+clf6 = KNNStream(stream.chunk, sensitivity = 0.02, limit = 500)
+
+fig = plt.figure()
+plt.plot(clf6.acc, 'r', label = 'Jakosc z najlepszego modelu')
+plt.plot(clf6.acc_candidate, 'b', label = 'Jakosc z modelu kandydujacego')
+plt.plot(clf6.acc_primary, 'g', label = 'Jakosc z modelu pierwotnego')
+fig.suptitle('KNN - scikit', fontsize=20)
+
+plt.xlabel('Numer probki')
+plt.ylabel('Uzyskana jakosc[%]')
+
+plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=3, mode="expand", borderaxespad=0.)
+
+plt.show()
+print('KNN - scikit')
+print(clf6.avg_acc)
+print(clf6.avg_acc_candidate)
+print(clf6.avg_acc_primary)
+print(clf6.mcc)
+print(clf6.stability)
+print(clf6.stability_candidate)
+print(clf6.stability_primary)
