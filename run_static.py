@@ -8,33 +8,49 @@ from StaticKNN import *
 import matplotlib.pyplot as plt
 import numpy as np
 
+acc_NB = []
+acc_NBsci = []
+acc_MLP = []
+acc_DT = []
+acc_SVM = []
+acc_KNN = []
 
-# NaiveBayes 
-data = StaticData('sea.csv', splitRatio = 0.8)
-train = NaiveBayesTrain(data.trainingSet)
-test = NaiveBayesTest(train.summaries, data.testSet)
+for x in range (0, 9):
+	data = StaticData('SEA1.csv', splitRatio = 0.8)
 
-# NaiveBayesSCI 
-data = StaticData('sea.csv', splitRatio = 0.8)
-train = NaiveBayesSCITrain(data.trainingSet)
-test = NaiveBayesSCITest(train.summaries, data.testSet)
+	# NaiveBayes 
+	train = NaiveBayesTrain(data.trainingSet)
+	test = NaiveBayesTest(train.summaries, data.testSet)
+	acc_NB.append(test.accuracy)
 
-# MLP 
-data = StaticData('sea.csv', splitRatio = 0.8)
-train = MLPTrain(data.trainingSet)
-test = MLPTest(train.summaries, data.testSet)
+	# NaiveBayesSCI 
+	train = NaiveBayesSCITrain(data.trainingSet)
+	test = NaiveBayesSCITest(train.summaries, data.testSet)
+	acc_NBsci.append(test.accuracy)
 
-# DecisionTree 
-data = StaticData('sea.csv', splitRatio = 0.8)
-train = DecisionTreeTrain(data.trainingSet)
-test = DecisionTreeTest(train.summaries, data.testSet)
+	# MLP 
+	train = MLPTrain(data.trainingSet)
+	test = MLPTest(train.summaries, data.testSet)
+	acc_MLP.append(test.accuracy)
 
-# SVM
-data = StaticData('sea.csv', splitRatio = 0.8)
-train = SVMTrain(data.trainingSet)
-test = SVMTest(train.summaries, data.testSet)
+	# DecisionTree 
+	train = DecisionTreeTrain(data.trainingSet)
+	test = DecisionTreeTest(train.summaries, data.testSet)
+	acc_DT.append(test.accuracy)
 
-#KNN
-data = StaticData('sea.csv', splitRatio = 0.8)
-train = KNNTrain(data.trainingSet)
-test = KNNTest(train.summaries, data.testSet)
+	# SVM
+	train = SVMTrain(data.trainingSet)
+	test = SVMTest(train.summaries, data.testSet)
+	acc_SVM.append(test.accuracy)
+
+	#KNN
+	train = KNNTrain(data.trainingSet)
+	test = KNNTest(train.summaries, data.testSet)
+	acc_KNN.append(test.accuracy)
+
+print(np.mean(acc_NB))
+print(np.mean(acc_NBsci))
+print(np.mean(acc_MLP))
+print(np.mean(acc_DT))
+print(np.mean(acc_SVM))
+print(np.mean(acc_KNN))

@@ -84,7 +84,10 @@ class modelFunctions:
 				FP += 1
 			if predictions[i] == 0 and testSet[i][-1] == 1:
 				FN += 1
-		accuracy = 2*TP/(2*TP+FP+FN)
+		if ((2*TP+FP+FN) == 0):
+			accuracy = 2*TP/1
+		else:
+			accuracy = 2*TP/(2*TP+FP+FN)
 		return (accuracy)
 
 

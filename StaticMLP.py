@@ -27,8 +27,8 @@ class MLPTrain(modelFunctions):
 
 class MLPTest(modelFunctions):
 	def __init__(self, summaries, testSet):
+		self.accuracy = 0
 		testX = self.separateLabel(testSet)
 		testY = self.separateClass(testSet)
 		prediction = summaries.predict(testX)
 		self.accuracy = metrics.f1_score(testY, prediction)
-		print(self.accuracy)
